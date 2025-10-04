@@ -1,5 +1,5 @@
 
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
+![Logo]([logo.png](https://github.com/dadpenguin/open/blob/master/logo.png)
 
 
 # Open - VSCode
@@ -13,7 +13,7 @@ An open source tiny utility cli to easily open projects to vscode. Ideal use for
 
 ## Demo
 
-![Demo Picture](https://github.com/dadpenguin/open/blob/master/py_open_demo.png?raw=true)
+![Demo Picture](https://github.com/dadpenguin/open/blob/master/py_open_demo.png)
 
 
 ## Installation
@@ -42,7 +42,7 @@ use `--help` flag for more information
 
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE]()
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/dadpenguin/open/blob/master/LICENSE)
  file for details.
 
 
