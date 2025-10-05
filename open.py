@@ -2,6 +2,28 @@ import click
 import subprocess
 import os
 import json
+import sys
+
+
+
+
+
+try:
+    if getattr(sys, 'frozen', False):
+    # If the application is run as a bundle, the PyInstaller bootloader
+    # extends the sys module by a flag frozen=True and sets the app 
+    # path into variable _MEIPASS'.
+        application_path = os.path.dirname(sys.executable)
+        
+    else:
+        application_path = os.path.dirname(os.path.abspath(__file__))
+
+    config_file_path = os.path.join(application_path, 'config.json')
+
+except Exception as e:
+    raise click.ClickException(f'Cannot get application path/config path: {e}')
+
+
 
 
 
@@ -9,7 +31,7 @@ import json
 
 def get_root_dir():
     try:
-        with open('config.json', 'r') as file:
+        with open(config_file_path, 'r') as file:
             
             file_json = json.load(file)
 
@@ -20,7 +42,7 @@ def get_root_dir():
 
 def root_dir_exist():
     try:
-        with open('config.json', 'r') as file:
+        with open(config_file_path, 'r') as file:
         
 
 
@@ -41,14 +63,14 @@ def root_dir_exist():
 
 def update_root_path(new_dir):
     try:
-        with open('config.json', 'r') as file:
+        with open(config_file_path, 'r') as file:
 
             file_json = json.load(file)
 
             file_json["ROOT_DIR"] = new_dir
     
 
-        with open('config.json', 'w') as files:
+        with open(config_file_path, 'w') as files:
 
             json.dump(file_json, file, indent=4)
 
@@ -61,7 +83,7 @@ def update_root_path(new_dir):
 
 def config_exist():
     try:
-        output = os.path.exists('config.json')
+        output = os.path.exists(config_file_path)
         return output
     except Exception as e:
         raise click.ClickException(f'Cannot check if config.json exists: {e}')
@@ -74,7 +96,7 @@ def create_config():
         new_path = click.prompt('Enter the root path', type=click.Path(exists=True, file_okay=False, dir_okay=True))
     
         # create a new file
-        with open('config.json', 'w') as file:
+        with open(config_file_path, 'w') as file:
             
             # append new json with the new path
             json.dump({"ROOT_DIR": new_path}, file, indent=4)
@@ -88,6 +110,10 @@ def create_config():
 def cli(project_path,root_dir):
     """Open project in VScode no more find, cd, code. save your directory then open projects directly"""
     
+    
+
+
+
     # Check if config file exists
     if config_exist():
 
